@@ -2,9 +2,9 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-	cout << "test print\n";
+	if (argc != 2)
 	{
 		cout << "Wrong number of arguments provided. Example usage:\n";
 		cout << "SPAN graph_file_path\n";
