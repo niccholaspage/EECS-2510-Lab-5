@@ -8,7 +8,7 @@ void parseGraphFile(const string& file_path)
 	ifstream inputStream;
 
 	inputStream.open(file_path);
-	
+
 	if (inputStream.fail())
 	{
 		cout << "Unable to open graph data file path.\n";
@@ -20,8 +20,6 @@ void parseGraphFile(const string& file_path)
 
 	inputStream >> numberOfNodes;
 
-	inputStream.close();
-
 	cout << "Number of Nodes: " << numberOfNodes << "\n";
 
 	char nodeName[2];
@@ -32,6 +30,23 @@ void parseGraphFile(const string& file_path)
 
 		cout << "Node Name: " << nodeName << "\n";
 	}
+
+	double weight;
+
+	for (int i = 0; i < numberOfNodes; i++)
+	{
+		cout << "Adjacency Matrix for " << i << ":\n";
+
+		for (int j = 0; j < numberOfNodes; j++)
+		{
+			inputStream >> weight;
+			cout << weight << " ";
+		}
+
+		cout << "\n";
+	}
+
+	inputStream.close();
 }
 
 int main(int argc, char* argv[])
