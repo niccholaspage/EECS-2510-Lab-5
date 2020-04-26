@@ -1,6 +1,38 @@
+#include <fstream>
 #include <iostream>
 
 using namespace std;
+
+void parseGraphFile(const string& file_path)
+{
+	ifstream inputStream;
+
+	inputStream.open(file_path);
+	
+	if (inputStream.fail())
+	{
+		cout << "Unable to open graph data file path.\n";
+
+		return;
+	}
+
+	unsigned int numberOfNodes;
+
+	inputStream >> numberOfNodes;
+
+	inputStream.close();
+
+	cout << "Number of Nodes: " << numberOfNodes << "\n";
+
+	char nodeName[2];
+
+	for (int i = 0; i < numberOfNodes; i++)
+	{
+		inputStream >> nodeName;
+
+		cout << "Node Name: " << nodeName << "\n";
+	}
+}
 
 int main(int argc, char* argv[])
 {
@@ -12,8 +44,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	cout << "argv[0]: " << argv[0] << "\n";
-	cout << "argv[1]: " << argv[1] << "\n";
+	parseGraphFile(argv[1]);
 
 	return 0;
 }
