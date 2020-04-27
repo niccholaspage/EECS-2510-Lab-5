@@ -13,7 +13,7 @@ private:
 	};
 	struct nodeListNode
 	{
-		node* node = nullptr;
+		node* head = nullptr;
 		nodeListNode* next = nullptr;
 	};
 	nodeListNode* head = nullptr;
@@ -22,6 +22,6 @@ public:
 	~Kruskal();
 
 	void makeSet(char word[WORD_LENGTH]);
-	void findSet(char word[WORD_LENGTH]);
+	nodeListNode* findSet(char word[WORD_LENGTH]);
 	void mergeSet(node* u, node* v);
 };
