@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include "Kruskal.h"
 
 using namespace std;
 
@@ -61,12 +62,15 @@ void parseGraphFile(const string& file_path)
 		cout << "\n";
 	}
 
+	Kruskal kruskal;
+
+	kruskal.calculateMst(nodeVertices, weights, numberOfNodes);
+
+	// Deletion of node vertices array
 	for (int i = 0; i < numberOfNodes; i++)
 	{
 		delete[] nodeVertices[i];
 	}
-
-	// Deletion of node vertices array
 	delete[] nodeVertices;
 
 	// Deletion of weights matrix
