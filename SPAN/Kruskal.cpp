@@ -80,3 +80,9 @@ void Kruskal::mergeSet(nodeList* u, nodeList* v)
 
 	delete v;
 }
+void Kruskal::calculateMst()
+{
+	node* p;
+
+
+}

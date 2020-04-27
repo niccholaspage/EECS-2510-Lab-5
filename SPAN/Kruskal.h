@@ -25,4 +25,5 @@ public:
 	void makeSet(char word[WORD_LENGTH]);
 	nodeList* findSet(char word[WORD_LENGTH]);
 	void mergeSet(nodeList* u, nodeList* v);
+	void calculateMst();
 };
