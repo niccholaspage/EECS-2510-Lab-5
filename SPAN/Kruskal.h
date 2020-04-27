@@ -5,7 +5,7 @@ using namespace std;
 class Kruskal
 {
 private:
-	static const unsigned int WORD_LENGTH = 2;
+	const static unsigned int WORD_LENGTH = 2;
 	struct node
 	{
 		char word[WORD_LENGTH];

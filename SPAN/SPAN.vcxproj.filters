@@ -26,5 +26,8 @@
     <ClInclude Include="Kruskal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Prim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
