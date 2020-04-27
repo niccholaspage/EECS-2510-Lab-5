@@ -170,4 +170,6 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 	{
 		cout << line << "\n";
 	}
+
+	delete[] edges;
 }
