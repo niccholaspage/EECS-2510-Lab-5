@@ -11,17 +11,17 @@ private:
 		char word[WORD_LENGTH];
 		node* next = nullptr;
 	};
-	struct nodeListNode
+	struct nodeList
 	{
 		node* head = nullptr;
-		nodeListNode* next = nullptr;
+		nodeList* next = nullptr;
 	};
-	nodeListNode* head = nullptr;
+	nodeList* head = nullptr;
 public:
 	Kruskal();
 	~Kruskal();
 
 	void makeSet(char word[WORD_LENGTH]);
-	nodeListNode* findSet(char word[WORD_LENGTH]);
+	nodeList* findSet(char word[WORD_LENGTH]);
 	void mergeSet(node* u, node* v);
 };

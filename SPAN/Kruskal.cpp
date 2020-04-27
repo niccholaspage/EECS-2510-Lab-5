@@ -13,7 +13,7 @@ Kruskal::~Kruskal()
 
 void Kruskal::makeSet(char word[WORD_LENGTH])
 {
-	nodeListNode* newNodeList = new nodeListNode();
+	nodeList* newNodeList = new nodeList();
 
 	node* newNode = new node();
 	strcpy(newNode->word, word);
@@ -32,9 +32,9 @@ void Kruskal::makeSet(char word[WORD_LENGTH])
 	head = newNodeList;
 }
 
-Kruskal::nodeListNode* Kruskal::findSet(char word[WORD_LENGTH])
+Kruskal::nodeList* Kruskal::findSet(char word[WORD_LENGTH])
 {
-	nodeListNode* p = head;
+	nodeList* p = head;
 
 	while (p != nullptr)
 	{
