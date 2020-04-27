@@ -20,5 +20,5 @@ public:
 	void makeSet(char word[WORD_LENGTH]);
 	node* findSet(char word[WORD_LENGTH]);
 	void mergeSet(node* u, node* v);
-	void calculateMst();
+	void calculateMst(char* nodeVertices, double** weights);
 };

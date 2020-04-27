@@ -65,7 +65,8 @@ void Kruskal::mergeSet(node* u, node* v)
 
 	p->nextNeighbor = v;
 }
-void Kruskal::calculateMst()
+
+void Kruskal::calculateMst(char* nodeVertices, double** weights)
 {
 	node* p;
 

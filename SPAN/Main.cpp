@@ -22,10 +22,12 @@ void parseGraphFile(const string& file_path)
 
 	cout << "Number of Nodes: " << numberOfNodes << "\n";
 
-	char* nodeVertices = new char[numberOfNodes];
+	char** nodeVertices = new char* [numberOfNodes];
 
 	for (int i = 0; i < numberOfNodes; i++)
 	{
+		nodeVertices[i] = new char[numberOfNodes];
+
 		inputStream >> nodeVertices[i];
 	}
 
@@ -57,6 +59,11 @@ void parseGraphFile(const string& file_path)
 		}
 
 		cout << "\n";
+	}
+
+	for (int i = 0; i < numberOfNodes; i++)
+	{
+		delete[] nodeVertices[i];
 	}
 
 	// Deletion of node vertices array
