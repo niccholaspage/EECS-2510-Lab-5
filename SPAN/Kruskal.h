@@ -9,21 +9,16 @@ private:
 	struct node
 	{
 		char word[WORD_LENGTH];
-		node* next = nullptr;
+		node* nextNeighbor = nullptr;
+		node* nextVertex = nullptr;
 	};
-	struct nodeList
-	{
-		node* head = nullptr;
-		nodeList* prev = nullptr;
-		nodeList* next = nullptr;
-	};
-	nodeList* head = nullptr;
+	node* head = nullptr;
 public:
 	Kruskal();
 	~Kruskal();
 
 	void makeSet(char word[WORD_LENGTH]);
-	nodeList* findSet(char word[WORD_LENGTH]);
-	void mergeSet(nodeList* u, nodeList* v);
+	node* findSet(char word[WORD_LENGTH]);
+	void mergeSet(node* u, node* v);
 	void calculateMst();
 };
