@@ -1,5 +1,7 @@
 #include "Kruskal.h"
 #include <iostream>
+#include <algorithm>
+#include <vector>
 
 Kruskal::Kruskal()
 {
@@ -78,6 +80,11 @@ void Kruskal::mergeSet(node* u, node* v)
 		q = q->nextVertex;
 	}
 
+	if (head == v)
+	{
+		head = v->nextVertex;
+	}
+
 	v->nextVertex = nullptr;
 }
 
@@ -134,18 +141,53 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 		makeSet(nodeVertices[i]);
 	}
 
+	double totalWeight = 0;
+
+	vector<string> output;
+
 	for (int i = 0; i < edgeNumber; i++)
 	{
 		edge& p = edges[i];
-
-		cout << "U: " << p.u << ", V: " << p.v << "\n";
 
 		node* uSet = findSet(nodeVertices[p.u]);
 		node* vSet = findSet(nodeVertices[p.v]);
 
 		if (uSet != vSet)
 		{
+			//cout << "Merging " << nodeVertices[p.u] << " and " << nodeVertices[p.v] << "\n";
+
 			mergeSet(uSet, vSet);
+
+			output.push_back(nodeVertices[p.u] + "-" + nodeVertices[p.v] + ": " + to_string((int) p.weight));
+
+			totalWeight += p.weight;
+
+			/*node* p = head;
+
+			while (p != nullptr)
+			{
+				node* q = p;
+
+				while (q != nullptr)
+				{
+					cout << q->word << " ";
+
+					q = q->nextNeighbor;
+				}
+
+				cout << "\n";
+
+				p = p->nextVertex;
+			}*/
 		}
+	}
+
+	sort(output.begin(), output.end());
+
+	cout << "Total Weight: " << totalWeight << "\n";
+
+	for (const string& line : output)
+	{
+		cout << line << "\n";
 	}
 }
