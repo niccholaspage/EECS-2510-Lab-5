@@ -28,6 +28,7 @@ void Kruskal::makeSet(char word[WORD_LENGTH])
 	}
 
 	newNodeList->next = head;
+	head->prev = newNodeList;
 
 	head = newNodeList;
 }
@@ -54,4 +55,28 @@ Kruskal::nodeList* Kruskal::findSet(char word[WORD_LENGTH])
 	}
 
 	return nullptr;
+}
+
+void Kruskal::mergeSet(nodeList* u, nodeList* v)
+{
+	node* p = u->head;
+
+	while (p->next != nullptr)
+	{
+		p = p->next;
+	}
+
+	p->next = v->head;
+
+	if (v->prev != nullptr)
+	{
+		v->prev->next = v->next;
+	}
+
+	if (v->next != nullptr)
+	{
+		v->next->prev = v->prev;
+	}
+
+	delete v;
 }

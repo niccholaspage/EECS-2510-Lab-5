@@ -14,6 +14,7 @@ private:
 	struct nodeList
 	{
 		node* head = nullptr;
+		nodeList* prev = nullptr;
 		nodeList* next = nullptr;
 	};
 	nodeList* head = nullptr;
@@ -23,5 +24,5 @@ public:
 
 	void makeSet(char word[WORD_LENGTH]);
 	nodeList* findSet(char word[WORD_LENGTH]);
-	void mergeSet(node* u, node* v);
+	void mergeSet(nodeList* u, nodeList* v);
 };
