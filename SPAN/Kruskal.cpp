@@ -1,8 +1,5 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "Kruskal.h"
 #include <iostream>
-#include <string.h>
 
 Kruskal::Kruskal()
 {
@@ -14,10 +11,11 @@ Kruskal::~Kruskal()
 
 }
 
-void Kruskal::makeSet(char word[WORD_LENGTH])
+void Kruskal::makeSet(const string& word)
 {
 	node* newNode = new node();
-	strcpy(newNode->word, word);
+
+	newNode->word = word;
 
 	if (head == nullptr)
 	{
@@ -31,7 +29,7 @@ void Kruskal::makeSet(char word[WORD_LENGTH])
 	head = newNode;
 }
 
-Kruskal::node* Kruskal::findSet(char word[WORD_LENGTH])
+Kruskal::node* Kruskal::findSet(const string& word)
 {
 	node* p = head;
 
@@ -41,7 +39,7 @@ Kruskal::node* Kruskal::findSet(char word[WORD_LENGTH])
 
 		while (q != nullptr)
 		{
-			if (strcmp(q->word, word) == 0)
+			if (q->word == word)
 			{
 				return p;
 			}
@@ -87,7 +85,7 @@ void Kruskal::insertionSort(edge* arr, int size)
 	}
 }
 
-void Kruskal::calculateMst(char** nodeVertices, double** weights, int numberOfNodes)
+void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
 {
 	node* a = nullptr;
 

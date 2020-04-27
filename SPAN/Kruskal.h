@@ -1,15 +1,14 @@
 #pragma once
+#include <string>
 
 using namespace std;
 
 class Kruskal
 {
-public:
-	const static unsigned int WORD_LENGTH = 2;
 private:
 	struct node
 	{
-		char word[WORD_LENGTH];
+		string word;
 		node* nextNeighbor = nullptr;
 		node* nextVertex = nullptr;
 	};
@@ -24,8 +23,8 @@ public:
 	Kruskal();
 	~Kruskal();
 
-	void makeSet(char word[WORD_LENGTH]);
-	node* findSet(char word[WORD_LENGTH]);
+	void makeSet(const string& word);
+	node* findSet(const string& word);
 	void mergeSet(node* u, node* v);
-	void calculateMst(char** nodeVertices, double** weights, int numberOfNodes);
+	void calculateMst(string* nodeVertices, double** weights, int numberOfNodes);
 };

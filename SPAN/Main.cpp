@@ -23,38 +23,36 @@ void parseGraphFile(const string& file_path)
 
 	cout << "Number of Nodes: " << numberOfNodes << "\n";
 
-	char** nodeVertices = new char* [numberOfNodes];
+	string* nodeVertices = new string[numberOfNodes];
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		nodeVertices[i] = new char[numberOfNodes];
-
 		inputStream >> nodeVertices[i];
 	}
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
 		cout << "Node Name: " << nodeVertices[i] << "\n";
 	}
 
 	double** weights = new double* [numberOfNodes];
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
 		weights[i] = new double[numberOfNodes];
 	}
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		for (int j = 0; j < numberOfNodes; j++)
+		for (unsigned int j = 0; j < numberOfNodes; j++)
 		{
 			inputStream >> weights[i][j];
 		}
 	}
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		for (int j = 0; j < numberOfNodes; j++)
+		for (unsigned int j = 0; j < numberOfNodes; j++)
 		{
 			cout << weights[i][j] << " ";
 		}
@@ -67,14 +65,10 @@ void parseGraphFile(const string& file_path)
 	kruskal.calculateMst(nodeVertices, weights, numberOfNodes);
 
 	// Deletion of node vertices array
-	for (int i = 0; i < numberOfNodes; i++)
-	{
-		delete[] nodeVertices[i];
-	}
 	delete[] nodeVertices;
 
 	// Deletion of weights matrix
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
 		delete[] weights[i];
 	}
