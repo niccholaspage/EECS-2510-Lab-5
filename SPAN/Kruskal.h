@@ -9,7 +9,6 @@ private:
 	struct node
 	{
 		char word[WORD_LENGTH];
-		double weight;
 		node* nextNeighbor = nullptr;
 		node* nextVertex = nullptr;
 	};

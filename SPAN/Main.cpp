@@ -22,29 +22,53 @@ void parseGraphFile(const string& file_path)
 
 	cout << "Number of Nodes: " << numberOfNodes << "\n";
 
-	char nodeName[2];
+	char* nodeVertices = new char[numberOfNodes];
 
 	for (int i = 0; i < numberOfNodes; i++)
 	{
-		inputStream >> nodeName;
-
-		cout << "Node Name: " << nodeName << "\n";
+		inputStream >> nodeVertices[i];
 	}
 
-	double weight;
+	for (int i = 0; i < numberOfNodes; i++)
+	{
+		cout << "Node Name: " << nodeVertices[i] << "\n";
+	}
+
+	double** weights = new double* [numberOfNodes];
 
 	for (int i = 0; i < numberOfNodes; i++)
 	{
-		cout << "Adjacency Matrix for " << i << ":\n";
+		weights[i] = new double[numberOfNodes];
+	}
 
+	for (int i = 0; i < numberOfNodes; i++)
+	{
 		for (int j = 0; j < numberOfNodes; j++)
 		{
-			inputStream >> weight;
-			cout << weight << " ";
+			inputStream >> weights[i][j];
+		}
+	}
+
+	for (int i = 0; i < numberOfNodes; i++)
+	{
+		for (int j = 0; j < numberOfNodes; j++)
+		{
+			cout << weights[i][j] << " ";
 		}
 
 		cout << "\n";
 	}
+
+	// Deletion of node vertices array
+	delete[] nodeVertices;
+
+	// Deletion of weights matrix
+	for (int i = 0; i < numberOfNodes; i++)
+	{
+		delete[] weights[i];
+	}
+
+	delete[] weights;
 
 	inputStream.close();
 }
