@@ -17,14 +17,25 @@ void parseGraphFile(const string& file_path)
 		return;
 	}
 
+	// We hold the number of nodes read from the file here.
 	unsigned int numberOfNodes;
 
+	// The first line of the file will have the number of nodes,
+	// so we simply pipe it into our number of nodes variable.
 	inputStream >> numberOfNodes;
 
+	// We dynamically allocate a string array of size numberOfNodes,
+	// which will store all of our node vertice names.
 	string* nodeVertices = new string[numberOfNodes];
 
+	// We loop numberOfNodes times, as that is how many
+	// node vertices we will have.
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
+		// We now simply pipe our input stream into
+		// our nodeVerticies array at position i,
+		// which will put the node vertice name
+		// into our array at the right position.
 		inputStream >> nodeVertices[i];
 	}
 
