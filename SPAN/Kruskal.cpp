@@ -65,6 +65,11 @@ void Kruskal::mergeSet(node* u, node* v)
 	}
 
 	p->nextNeighbor = v;
+	if (p->nextVertex == v)
+	{
+		p->nextVertex = v->nextVertex;
+	}
+	v->nextVertex = nullptr;
 }
 
 void Kruskal::insertionSort(edge* arr, int size)
@@ -105,8 +110,8 @@ void Kruskal::calculateMst(char** nodeVertices, double** weights, int numberOfNo
 			{
 				edge p;
 
-				strcpy(p.left, nodeVertices[i]);
-				strcpy(p.right, nodeVertices[j]);
+				p.u = i;
+				p.v = j;
 
 				p.weight = weight;
 
@@ -123,6 +128,22 @@ void Kruskal::calculateMst(char** nodeVertices, double** weights, int numberOfNo
 	for (int i = 0; i < edgeNumber; i++)
 	{
 		edge& p = edges[i];
-		cout << "Edge (left: " << p.left << ", right: " << p.right << ", weight: " << p.weight << ")\n";
+
+		node* uSet = findSet(nodeVertices[p.u]);
+		node* vSet = findSet(nodeVertices[p.v]);
+		
+		if (uSet != vSet)
+		{
+			mergeSet(uSet, vSet);
+
+			if (a == nullptr)
+			{
+				a = uSet;
+			}
+			else
+			{
+				mergeSet(a, uSet);
+			}
+		}
 	}
 }

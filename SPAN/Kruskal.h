@@ -14,8 +14,8 @@ private:
 		node* nextVertex = nullptr;
 	};
 	struct edge {
-		char left[WORD_LENGTH];
-		char right[WORD_LENGTH];
+		unsigned int u;
+		unsigned int v;
 		double weight;
 	};
 	node* head = nullptr;
