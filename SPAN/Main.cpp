@@ -21,18 +21,11 @@ void parseGraphFile(const string& file_path)
 
 	inputStream >> numberOfNodes;
 
-	//cout << "Number of Nodes: " << numberOfNodes << "\n";
-
 	string* nodeVertices = new string[numberOfNodes];
 
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
 		inputStream >> nodeVertices[i];
-	}
-
-	for (unsigned int i = 0; i < numberOfNodes; i++)
-	{
-		//cout << "Node Name: " << nodeVertices[i] << "\n";
 	}
 
 	double** weights = new double* [numberOfNodes];
@@ -49,16 +42,6 @@ void parseGraphFile(const string& file_path)
 			inputStream >> weights[i][j];
 		}
 	}
-
-	/*for (unsigned int i = 0; i < numberOfNodes; i++)
-	{
-		for (unsigned int j = 0; j < numberOfNodes; j++)
-		{
-			cout << weights[i][j] << " ";
-		}
-
-		cout << "\n";
-	}*/
 
 	Kruskal kruskal;
 

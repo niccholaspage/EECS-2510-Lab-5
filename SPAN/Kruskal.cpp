@@ -154,31 +154,11 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 
 		if (uSet != vSet)
 		{
-			//cout << "Merging " << nodeVertices[p.u] << " and " << nodeVertices[p.v] << "\n";
-
 			mergeSet(uSet, vSet);
 
 			output.push_back(nodeVertices[p.u] + "-" + nodeVertices[p.v] + ": " + to_string((int) p.weight));
 
 			totalWeight += p.weight;
-
-			/*node* p = head;
-
-			while (p != nullptr)
-			{
-				node* q = p;
-
-				while (q != nullptr)
-				{
-					cout << q->word << " ";
-
-					q = q->nextNeighbor;
-				}
-
-				cout << "\n";
-
-				p = p->nextVertex;
-			}*/
 		}
 	}
 
