@@ -88,7 +88,7 @@ void Kruskal::mergeSet(node* u, node* v)
 	v->nextVertex = nullptr;
 }
 
-void Kruskal::insertionSort(edge* arr, int size)
+void Kruskal::insertionSort(edge arr[], int size)
 {
 	edge key;
 	int j;
