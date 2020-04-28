@@ -1,24 +1,30 @@
 #pragma once
+#include <string>
+
+using namespace std;
+
 class Prim {
 private:
-	const static unsigned int WORD_LENGTH = 2;
 	struct node
 	{
-		char word[WORD_LENGTH];
+		string word;
 		double weight;
 	};
+
+	void insert(const string& word);
+	node* minimum();
+	node* extractMin();
+	unsigned int parent(unsigned int index);
+	unsigned int left(unsigned index);
+	unsigned int right(unsigned index);
+	void decreaseKey(node* x, unsigned int index, node key);
+	void minHeapify(unsigned int index);
 
 	unsigned int heapLength;
 	unsigned int heapSize;
 
-	node* array[100]; // TODO: Somehow figure out variable sizing.
+	node heapArray[];
 public:
 	Prim();
 	~Prim();
-
-	void insert(char word[WORD_LENGTH], double weight);
-	node* maximum();
-	node* extractMax();
-	void increaseKey(node* x, int k);
-	void maxHeapify();
 };

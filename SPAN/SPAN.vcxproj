@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Kruskal.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Prim.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kruskal.h" />
