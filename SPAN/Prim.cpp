@@ -146,7 +146,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 		insert(nodeVertices[i], std::numeric_limits<double>::max());
 	}
 
-	heapArray[0].weight = 0;
+	heapArray[1].weight = 0;
 
 	while (heapSize != 0)
 	{
