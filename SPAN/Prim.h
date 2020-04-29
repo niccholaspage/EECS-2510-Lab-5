@@ -15,8 +15,8 @@ private:
 	node* minimum();
 	node* extractMin();
 	unsigned int parent(unsigned int index);
-	unsigned int left(unsigned index);
-	unsigned int right(unsigned index);
+	unsigned int left(unsigned int index);
+	unsigned int right(unsigned int index);
 	void decreaseKey(node* x, unsigned int index, node key);
 	void minHeapify(unsigned int index);
 
