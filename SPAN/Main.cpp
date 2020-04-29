@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include "Kruskal.h"
+#include "Prim.h"
 
 using namespace std;
 
@@ -78,6 +79,12 @@ void parseGraphFile(const string& file_path)
 	kruskal->calculateMst(nodeVertices, weights, numberOfNodes);
 
 	delete kruskal;
+
+	Prim* prim = new Prim();
+
+	prim->calculateMst(nodeVertices, weights, numberOfNodes);
+
+	delete prim;
 
 	// Deletion of node vertices array
 	delete[] nodeVertices;
