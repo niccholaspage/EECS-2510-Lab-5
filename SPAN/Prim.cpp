@@ -31,17 +31,17 @@ Prim::node* Prim::extractMin()
 
 unsigned Prim::left(unsigned int index)
 {
-	return 0;
+	return 2 * index;
 }
 
 unsigned int Prim::right(unsigned int index)
 {
-	return 0;
+	return 2 * index + 1;
 }
 
 unsigned int Prim::parent(unsigned int index)
 {
-	return 0;
+	return index / 2;
 }
 
 void Prim::decreaseKey(node* x, unsigned int index, node key)
