@@ -9,12 +9,12 @@ private:
 	{
 		string word;
 		double weight;
-		node* predecessor;
+		string predecessor;
 	};
 
 	void insert(const string& word, double key);
 	node* minimum();
-	node* extractMin();
+	string extractMinWord();
 	unsigned int parent(unsigned int index);
 	unsigned int left(unsigned int index);
 	unsigned int right(unsigned int index);

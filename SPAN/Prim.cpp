@@ -19,7 +19,7 @@ Prim::node* Prim::minimum()
 	return &heapArray[1];
 }
 
-Prim::node* Prim::extractMin()
+string Prim::extractMinWord()
 {
 	if (heapSize < 1)
 	{
@@ -36,7 +36,7 @@ Prim::node* Prim::extractMin()
 
 	minHeapify(1);
 
-	return &min;
+	return min.word;
 }
 
 unsigned Prim::left(unsigned int index)
@@ -113,7 +113,7 @@ void Prim::insert(const string& word, double key)
 
 	newNode.word = word;
 	newNode.weight = std::numeric_limits<double>::max(); // TODO: probably no good.
-	newNode.predecessor = nullptr;
+	newNode.predecessor = "";
 
 	heapArray[heapSize] = newNode;
 
@@ -153,15 +153,17 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 	// heapArray[1].weight = 0;
 	decreaseKey(1, 0);
 
+	double totalWeight = 0;
+
 	while (heapSize != 0)
 	{
-		node* u = extractMin();
+		string uWord = extractMinWord();
 
 		unsigned int uRow = 0;
 
 		for (unsigned int i = 0; i < numberOfNodes; i++)
 		{
-			if (nodeVertices[i] == u->word)
+			if (nodeVertices[i] == uWord)
 			{
 				uRow = i;
 
@@ -179,12 +181,15 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 				if (v != nullptr && weights[uRow][i] < v->weight)
 				{
-					v->predecessor = u;
+					v->predecessor = uWord;
 					v->weight = weights[uRow][i];
+					totalWeight += v->weight;
 				}
 			}
 		}
 	}
+
+	cout << totalWeight << "\n";
 
 	delete[] heapArray;
 }
