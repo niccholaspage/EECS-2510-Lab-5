@@ -84,28 +84,28 @@ void Prim::minHeapify(unsigned int index)
 {
 	unsigned int leftChild = left(index);
 	unsigned int rightChild = right(index);
-	unsigned int largest;
+	unsigned int smallest;
 
-	if (leftChild < heapSize && heapArray[leftChild].weight > heapArray[index].weight)
+	if (leftChild < heapSize && heapArray[leftChild].weight < heapArray[index].weight)
 	{
-		largest = leftChild;
+		smallest = leftChild;
 	}
 	else
 	{
-		largest = index;
+		smallest = index;
 	}
 
-	if (rightChild < heapSize && heapArray[rightChild].weight > heapArray[largest].weight)
+	if (rightChild < heapSize && heapArray[rightChild].weight < heapArray[smallest].weight)
 	{
-		largest = rightChild;
+		smallest = rightChild;
 	}
 
-	if (largest != index)
+	if (smallest != index)
 	{
 		node temp = heapArray[index];
-		heapArray[index] = heapArray[largest];
-		heapArray[largest] = temp;
-		minHeapify(largest);
+		heapArray[index] = heapArray[smallest];
+		heapArray[smallest] = temp;
+		minHeapify(smallest);
 	}
 }
 
