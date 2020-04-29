@@ -135,7 +135,7 @@ Prim::node* Prim::getVertex(const string& word)
 
 void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
 {
-	heapLength = numberOfNodes;
+	heapLength = numberOfNodes + 1;
 
 	heapArray = new node[heapLength];
 
