@@ -82,7 +82,7 @@ void Prim::minHeapify(unsigned int index)
 	unsigned int rightChild = right(index);
 	unsigned int smallest;
 
-	if (leftChild < heapSize && heapArray[leftChild].weight < heapArray[index].weight)
+	if (leftChild <= heapSize && heapArray[leftChild].weight < heapArray[index].weight)
 	{
 		smallest = leftChild;
 	}
@@ -91,7 +91,7 @@ void Prim::minHeapify(unsigned int index)
 		smallest = index;
 	}
 
-	if (rightChild < heapSize && heapArray[rightChild].weight < heapArray[smallest].weight)
+	if (rightChild <= heapSize && heapArray[rightChild].weight < heapArray[smallest].weight)
 	{
 		smallest = rightChild;
 	}
