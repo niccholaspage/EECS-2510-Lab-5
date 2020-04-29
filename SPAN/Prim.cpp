@@ -4,6 +4,20 @@
 
 using namespace std;
 
+Prim::Prim(unsigned int length)
+{
+	heapLength = length;
+
+	heapArray = new node[length];
+
+	heapSize = 0;
+}
+
+Prim::~Prim()
+{
+	delete[] heapArray;
+}
+
 Prim::node* Prim::minimum()
 {
 	return &heapArray[1];

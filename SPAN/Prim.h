@@ -23,8 +23,8 @@ private:
 	unsigned int heapLength;
 	unsigned int heapSize;
 
-	node heapArray[];
+	node* heapArray;
 public:
-	Prim();
+	Prim(unsigned int length);
 	~Prim();
 };
