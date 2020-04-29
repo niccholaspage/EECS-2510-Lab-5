@@ -122,7 +122,7 @@ void Prim::insert(const string& word, double key)
 
 Prim::node* Prim::getVertex(const string& word)
 {
-	for (unsigned int i = 0; i < heapSize; i++)
+	for (unsigned int i = 1; i <= heapSize; i++)
 	{
 		if (heapArray[i].word == word)
 		{
