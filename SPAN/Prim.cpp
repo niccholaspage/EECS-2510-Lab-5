@@ -146,7 +146,12 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 		insert(nodeVertices[i], std::numeric_limits<double>::max());
 	}
 
-	heapArray[1].weight = 0;
+	// I think these are functionally equivalent,
+	// since setting the first node's weight to 0
+	// makes its weight less than the other weights
+	// of infinity, so it should be in order properly
+	// heapArray[1].weight = 0;
+	decreaseKey(1, 0);
 
 	while (heapSize != 0)
 	{
