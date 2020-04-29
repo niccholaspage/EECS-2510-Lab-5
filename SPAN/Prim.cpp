@@ -4,18 +4,14 @@
 
 using namespace std;
 
-Prim::Prim(unsigned int length)
+Prim::Prim()
 {
-	heapLength = length;
 
-	heapArray = new node[length];
-
-	heapSize = 0;
 }
 
 Prim::~Prim()
 {
-	delete[] heapArray;
+
 }
 
 Prim::node* Prim::minimum()
@@ -116,9 +112,74 @@ void Prim::insert(const string& word, double key)
 	node newNode;
 
 	newNode.word = word;
-	newNode.weight = std::numeric_limits<double>::min(); // TODO: probably no good.
+	newNode.weight = std::numeric_limits<double>::max(); // TODO: probably no good.
+	newNode.predecessor = nullptr;
 
 	heapArray[heapSize] = newNode;
 
 	decreaseKey(heapSize, key);
+}
+
+Prim::node* Prim::getVertex(const string& word)
+{
+	for (unsigned int i = 0; i < heapSize; i++)
+	{
+		if (heapArray[i].word == word)
+		{
+			return &heapArray[i];
+		}
+	}
+
+	return nullptr;
+}
+
+void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
+{
+	heapLength = numberOfNodes;
+
+	heapArray = new node[heapLength];
+
+	heapSize = 0;
+
+	for (unsigned int i = 0; i < numberOfNodes; i++)
+	{
+		insert(nodeVertices[i], std::numeric_limits<double>::max());
+	}
+
+	heapArray[0].weight = 0;
+
+	while (heapSize != 0)
+	{
+		node* u = extractMin();
+
+		unsigned int uRow = 0;
+
+		for (unsigned int i = 0; i < numberOfNodes; i++)
+		{
+			if (nodeVertices[i] == u->word)
+			{
+				uRow = i;
+
+				break;
+			}
+		}
+
+		for (unsigned int i = 0; i < numberOfNodes; i++)
+		{
+			if (weights[uRow][i] != 0)
+			{
+				const string& vWord = nodeVertices[i];
+
+				node* v = getVertex(vWord);
+
+				if (v != nullptr && weights[uRow][i] < v->weight)
+				{
+					v->predecessor = u;
+					v->weight = weights[uRow][i];
+				}
+			}
+		}
+	}
+
+	delete[] heapArray;
 }

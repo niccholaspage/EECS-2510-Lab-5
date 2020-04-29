@@ -9,6 +9,7 @@ private:
 	{
 		string word;
 		double weight;
+		node* predecessor;
 	};
 
 	void insert(const string& word, double key);
@@ -19,12 +20,14 @@ private:
 	unsigned int right(unsigned int index);
 	void decreaseKey(unsigned int index, double key);
 	void minHeapify(unsigned int index);
+	node* getVertex(const string& word);
 
 	unsigned int heapLength;
 	unsigned int heapSize;
 
 	node* heapArray;
 public:
-	Prim(unsigned int length);
+	Prim();
 	~Prim();
+	void calculateMst(string* nodeVertices, double** weights, int numberOfNodes);
 };
