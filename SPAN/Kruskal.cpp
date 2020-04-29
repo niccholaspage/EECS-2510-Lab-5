@@ -164,7 +164,7 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 
 	sort(output.begin(), output.end());
 
-	cout << "Total Weight: " << totalWeight << "\n";
+	cout << totalWeight << "\n";
 
 	for (const string& line : output)
 	{
