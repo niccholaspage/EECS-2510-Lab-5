@@ -11,13 +11,13 @@ private:
 		double weight;
 	};
 
-	void insert(const string& word);
+	void insert(const string& word, double key);
 	node* minimum();
 	node* extractMin();
 	unsigned int parent(unsigned int index);
 	unsigned int left(unsigned int index);
 	unsigned int right(unsigned int index);
-	void decreaseKey(node* x, unsigned int index, node key);
+	void decreaseKey(unsigned int index, double key);
 	void minHeapify(unsigned int index);
 
 	unsigned int heapLength;

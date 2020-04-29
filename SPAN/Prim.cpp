@@ -44,16 +44,16 @@ unsigned int Prim::parent(unsigned int index)
 	return index / 2;
 }
 
-void Prim::decreaseKey(node* x, unsigned int index, node key)
+void Prim::decreaseKey(unsigned int index, double key)
 {
-	if (key.weight > heapArray[index].weight)
+	if (key > heapArray[index].weight)
 	{
 		cout << "New key value is greater than current key value";
 
 		return;
 	}
 
-	heapArray[index] = key;
+	heapArray[index].weight = key;
 
 	unsigned int parentIndex = parent(index);
 
@@ -93,4 +93,18 @@ void Prim::minHeapify(unsigned int index)
 		heapArray[largest] = temp;
 		minHeapify(largest);
 	}
+}
+
+void Prim::insert(const string& word, double key)
+{
+	heapSize++;
+
+	node newNode;
+
+	newNode.word = word;
+	newNode.weight = std::numeric_limits<double>::min(); // TODO: probably no good.
+
+	heapArray[heapSize] = newNode;
+
+	decreaseKey(heapSize, key);
 }
