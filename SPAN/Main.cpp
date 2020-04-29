@@ -80,6 +80,8 @@ void parseGraphFile(const string& file_path)
 
 	delete kruskal;
 
+	cout << "---------------------------------------------------------------\n";
+
 	Prim* prim = new Prim();
 
 	prim->calculateMst(nodeVertices, weights, numberOfNodes);
