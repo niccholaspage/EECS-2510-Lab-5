@@ -32,7 +32,7 @@ Prim::node* Prim::extractMin()
 
 	heapArray[1] = heapArray[heapSize];
 
-	heapSize = heapSize - 1;
+	heapSize--;
 
 	minHeapify(1);
 
