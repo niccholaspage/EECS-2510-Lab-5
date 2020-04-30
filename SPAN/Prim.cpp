@@ -182,5 +182,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 	cout << totalWeight << "\n";
 
+	delete[] nodes;
+
 	delete[] heapArray;
 }
