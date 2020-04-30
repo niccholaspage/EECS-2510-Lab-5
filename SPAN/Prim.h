@@ -12,19 +12,19 @@ private:
 		string predecessor;
 	};
 
-	int extractMinNodeIndex();
+	node* extractMinNode();
 	unsigned int parent(unsigned int index);
 	unsigned int left(unsigned int index);
 	unsigned int right(unsigned int index);
 	void decreaseKey(unsigned int index, double key);
 	void minHeapify(unsigned int index);
-	int getPositionInQueue(unsigned int nodeIndex);
+	int getPositionInQueue(node* p);
 
 	unsigned int heapLength;
 	unsigned int heapSize;
 
 	node* nodes;
-	unsigned int* heapArray;
+	node** heapArray;
 public:
 	Prim();
 	~Prim();

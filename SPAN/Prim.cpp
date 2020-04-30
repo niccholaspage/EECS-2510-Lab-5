@@ -14,16 +14,16 @@ Prim::~Prim()
 
 }
 
-int Prim::extractMinNodeIndex()
+Prim::node* Prim::extractMinNode()
 {
 	if (heapSize < 1)
 	{
 		cout << "Error: heap underflow\n";
 
-		return -1;
+		return nullptr;
 	}
 
-	int min = heapArray[1];
+	node* min = heapArray[1];
 
 	heapArray[1] = heapArray[heapSize];
 
@@ -51,20 +51,20 @@ unsigned int Prim::parent(unsigned int index)
 
 void Prim::decreaseKey(unsigned int index, double key)
 {
-	node& p = nodes[heapArray[index]];
+	node* p = heapArray[index];
 
-	if (key > p.weight)
+	if (key > p->weight)
 	{
 		cout << "New key value is greater than current key value\n";
 
 		return;
 	}
 
-	p.weight = key;
+	p->weight = key;
 
-	while (index > 1 && nodes[heapArray[parent(index)]].weight > nodes[heapArray[index]].weight)
+	while (index > 1 && heapArray[parent(index)]->weight > heapArray[index]->weight)
 	{
-		unsigned int temp = heapArray[index];
+		node* temp = heapArray[index];
 		heapArray[index] = heapArray[parent(index)];
 		heapArray[parent(index)] = temp;
 		index = parent(index);
@@ -77,7 +77,7 @@ void Prim::minHeapify(unsigned int index)
 	unsigned int rightChild = right(index);
 	unsigned int smallest;
 
-	if (leftChild <= heapSize && nodes[heapArray[leftChild]].weight < nodes[heapArray[index]].weight)
+	if (leftChild <= heapSize && heapArray[leftChild]->weight < heapArray[index]->weight)
 	{
 		smallest = leftChild;
 	}
@@ -86,25 +86,25 @@ void Prim::minHeapify(unsigned int index)
 		smallest = index;
 	}
 
-	if (rightChild <= heapSize && nodes[heapArray[rightChild]].weight < nodes[heapArray[smallest]].weight)
+	if (rightChild <= heapSize && heapArray[rightChild]->weight < heapArray[smallest]->weight)
 	{
 		smallest = rightChild;
 	}
 
 	if (smallest != index)
 	{
-		unsigned int temp = heapArray[index];
+		node* temp = heapArray[index];
 		heapArray[index] = heapArray[smallest];
 		heapArray[smallest] = temp;
 		minHeapify(smallest);
 	}
 }
 
-int Prim::getPositionInQueue(unsigned int nodeIndex)
+int Prim::getPositionInQueue(node* p)
 {
 	for (unsigned int i = 1; i <= heapSize; i++)
 	{
-		if (heapArray[i] == nodeIndex)
+		if (heapArray[i] == p)
 		{
 			return i;
 		}
@@ -119,7 +119,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 	heapLength = numberOfNodes + 1;
 
-	heapArray = new unsigned int[heapLength];
+	heapArray = new node * [heapLength];
 
 	heapSize = 0;
 
@@ -130,7 +130,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 		newNode.weight = std::numeric_limits<double>::max();
 		newNode.predecessor = "";
 		nodes[i] = newNode;
-		heapArray[i + 1] = i;
+		heapArray[i + 1] = &nodes[i];
 		heapSize++;
 	}
 
@@ -138,9 +138,9 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 	while (heapSize != 0)
 	{
-		int uNodeIndex = extractMinNodeIndex();
+		node* u = extractMinNode();
 
-		node& u = nodes[uNodeIndex];
+		unsigned int uNodeIndex = u - &nodes[0];
 
 		for (unsigned int i = 0; i < numberOfNodes; i++)
 		{
@@ -150,12 +150,12 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 				node* v = &nodes[i];
 
-				int positionInQueue = getPositionInQueue(i);
+				int positionInQueue = getPositionInQueue(v);
 
 				if (positionInQueue != -1 && weights[uNodeIndex][i] < v->weight)
 				{
 					double newWeight = weights[uNodeIndex][i];
-					v->predecessor = u.word;
+					v->predecessor = u->word;
 					decreaseKey(positionInQueue, newWeight);
 				}
 			}
