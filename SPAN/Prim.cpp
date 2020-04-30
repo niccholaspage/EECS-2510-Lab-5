@@ -65,13 +65,11 @@ void Prim::decreaseKey(unsigned int index, double key)
 
 	heapArray[index].weight = key;
 
-	unsigned int parentIndex = parent(index);
-
-	while (index > 1 && heapArray[parentIndex].weight > heapArray[index].weight)
+	while (index > 1 && heapArray[parent(index)].weight > heapArray[index].weight)
 	{
 		node temp = heapArray[index];
-		heapArray[index] = heapArray[parentIndex];
-		heapArray[parentIndex] = temp;
+		heapArray[index] = heapArray[parent(index)];
+		heapArray[parent(index)] = temp;
 		index = parent(index);
 	}
 }
