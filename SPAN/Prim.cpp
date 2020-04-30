@@ -118,17 +118,17 @@ void Prim::insert(const string& word, double key)
 	decreaseKey(heapSize, key);
 }
 
-Prim::node* Prim::getVertex(const string& word)
+unsigned int Prim::getVertexIndex(const string& word)
 {
 	for (unsigned int i = 1; i <= heapSize; i++)
 	{
 		if (heapArray[i].word == word)
 		{
-			return &heapArray[i];
+			return i;
 		}
 	}
 
-	return nullptr;
+	return 0;
 }
 
 void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
@@ -175,14 +175,17 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 			{
 				const string& vWord = nodeVertices[i];
 
-				node* v = getVertex(vWord);
+				unsigned int vertexIndex = getVertexIndex(vWord);
 
-				if (v != nullptr && weights[uRow][i] < v->weight)
+				node* v = &heapArray[vertexIndex];
+
+				if (vertexIndex != 0 && weights[uRow][i] < v->weight)
 				{
+					double newWeight = weights[uRow][i];
 					v->predecessor = uWord;
-					v->weight = weights[uRow][i];
-					totalWeight += v->weight;
-					cout << uWord << "-" << v->word << ": " << v->weight << "\n";
+					totalWeight += newWeight;
+					cout << uWord << "-" << v->word << ": " << newWeight << "\n";
+					decreaseKey(vertexIndex, newWeight);
 				}
 			}
 		}

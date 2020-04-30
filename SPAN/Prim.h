@@ -20,7 +20,7 @@ private:
 	unsigned int right(unsigned int index);
 	void decreaseKey(unsigned int index, double key);
 	void minHeapify(unsigned int index);
-	node* getVertex(const string& word);
+	unsigned int getVertexIndex(const string& word);
 
 	unsigned int heapLength;
 	unsigned int heapSize;
