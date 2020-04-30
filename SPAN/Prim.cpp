@@ -134,11 +134,6 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 		heapSize++;
 	}
 
-	// I think these are functionally equivalent,
-	// since setting the first node's weight to 0
-	// makes its weight less than the other weights
-	// of infinity, so it should be in order properly
-	// heapArray[1].weight = 0;
 	decreaseKey(1, 0);
 
 	while (heapSize != 0)
@@ -161,8 +156,6 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 				{
 					double newWeight = weights[uNodeIndex][i];
 					v->predecessor = u.word;
-					//totalWeight += newWeight;
-					//cout << uWord << "-" << v->word << ": " << newWeight << "\n";
 					decreaseKey(positionInQueue, newWeight);
 				}
 			}
