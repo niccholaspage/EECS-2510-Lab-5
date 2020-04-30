@@ -182,6 +182,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 					v->predecessor = uWord;
 					v->weight = weights[uRow][i];
 					totalWeight += v->weight;
+					cout << uWord << "-" << v->word << ": " << v->weight << "\n";
 				}
 			}
 		}
