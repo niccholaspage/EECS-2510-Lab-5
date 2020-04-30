@@ -51,16 +51,16 @@ unsigned int Prim::parent(unsigned int index)
 
 void Prim::decreaseKey(unsigned int index, double key)
 {
-	node* p = &nodes[heapArray[index]];
+	node& p = nodes[heapArray[index]];
 
-	if (key > p->weight)
+	if (key > p.weight)
 	{
 		cout << "New key value is greater than current key value\n";
 
 		return;
 	}
 
-	p->weight = key;
+	p.weight = key;
 
 	while (index > 1 && nodes[heapArray[parent(index)]].weight > nodes[heapArray[index]].weight)
 	{
@@ -145,7 +145,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 	{
 		int uNodeIndex = extractMinNodeIndex();
 
-		node* u = &nodes[uNodeIndex];
+		node& u = nodes[uNodeIndex];
 
 		for (unsigned int i = 0; i < numberOfNodes; i++)
 		{
@@ -160,7 +160,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 				if (positionInQueue != -1 && weights[uNodeIndex][i] < v->weight)
 				{
 					double newWeight = weights[uNodeIndex][i];
-					v->predecessor = u->word;
+					v->predecessor = u.word;
 					//totalWeight += newWeight;
 					//cout << uWord << "-" << v->word << ": " << newWeight << "\n";
 					decreaseKey(positionInQueue, newWeight);
