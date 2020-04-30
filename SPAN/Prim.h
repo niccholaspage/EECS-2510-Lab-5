@@ -18,7 +18,7 @@ private:
 	unsigned int right(unsigned int index);
 	void decreaseKey(unsigned int index, double key);
 	void minHeapify(unsigned int index);
-	int getPositionInQueue(node* p);
+	unsigned int getPositionInQueue(node* p);
 
 	unsigned int heapLength;
 	unsigned int heapSize;
