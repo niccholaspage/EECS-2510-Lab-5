@@ -14,21 +14,16 @@ Prim::~Prim()
 
 }
 
-Prim::node* Prim::minimum()
-{
-	return &heapArray[1];
-}
-
-string Prim::extractMinWord()
+int Prim::extractMinNodeIndex()
 {
 	if (heapSize < 1)
 	{
 		cout << "Error: heap underflow\n";
 
-		return nullptr;
+		return -1;
 	}
 
-	node min = heapArray[1];
+	int min = heapArray[1];
 
 	heapArray[1] = heapArray[heapSize];
 
@@ -36,7 +31,7 @@ string Prim::extractMinWord()
 
 	minHeapify(1);
 
-	return min.word;
+	return min;
 }
 
 unsigned Prim::left(unsigned int index)
@@ -56,18 +51,20 @@ unsigned int Prim::parent(unsigned int index)
 
 void Prim::decreaseKey(unsigned int index, double key)
 {
-	if (key > heapArray[index].weight)
+	node* p = &nodes[heapArray[index]];
+
+	if (key > p->weight)
 	{
-		cout << "New key value is greater than current key value";
+		cout << "New key value is greater than current key value\n";
 
 		return;
 	}
 
-	heapArray[index].weight = key;
+	p->weight = key;
 
-	while (index > 1 && heapArray[parent(index)].weight > heapArray[index].weight)
+	while (index > 1 && nodes[heapArray[parent(index)]].weight > nodes[heapArray[index]].weight)
 	{
-		node temp = heapArray[index];
+		unsigned int temp = heapArray[index];
 		heapArray[index] = heapArray[parent(index)];
 		heapArray[parent(index)] = temp;
 		index = parent(index);
@@ -80,7 +77,7 @@ void Prim::minHeapify(unsigned int index)
 	unsigned int rightChild = right(index);
 	unsigned int smallest;
 
-	if (leftChild <= heapSize && heapArray[leftChild].weight < heapArray[index].weight)
+	if (leftChild <= heapSize && nodes[heapArray[leftChild]].weight < nodes[heapArray[index]].weight)
 	{
 		smallest = leftChild;
 	}
@@ -89,59 +86,52 @@ void Prim::minHeapify(unsigned int index)
 		smallest = index;
 	}
 
-	if (rightChild <= heapSize && heapArray[rightChild].weight < heapArray[smallest].weight)
+	if (rightChild <= heapSize && nodes[heapArray[rightChild]].weight < nodes[heapArray[smallest]].weight)
 	{
 		smallest = rightChild;
 	}
 
 	if (smallest != index)
 	{
-		node temp = heapArray[index];
+		unsigned int temp = heapArray[index];
 		heapArray[index] = heapArray[smallest];
 		heapArray[smallest] = temp;
 		minHeapify(smallest);
 	}
 }
 
-void Prim::insert(const string& word, double key)
-{
-	heapSize++;
-
-	node newNode;
-
-	newNode.word = word;
-	newNode.weight = std::numeric_limits<double>::max(); // TODO: probably no good.
-	newNode.predecessor = "";
-
-	heapArray[heapSize] = newNode;
-
-	decreaseKey(heapSize, key);
-}
-
-unsigned int Prim::getVertexIndex(const string& word)
+int Prim::getPositionInQueue(unsigned int nodeIndex)
 {
 	for (unsigned int i = 1; i <= heapSize; i++)
 	{
-		if (heapArray[i].word == word)
+		if (heapArray[i] == nodeIndex)
 		{
 			return i;
 		}
 	}
 
-	return 0;
+	return -1;
 }
 
 void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
 {
+	nodes = new node[numberOfNodes];
+
 	heapLength = numberOfNodes + 1;
 
-	heapArray = new node[heapLength];
+	heapArray = new unsigned int[heapLength];
 
 	heapSize = 0;
 
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		insert(nodeVertices[i], std::numeric_limits<double>::max());
+		node newNode;
+		newNode.word = nodeVertices[i];
+		newNode.weight = std::numeric_limits<double>::max();
+		newNode.predecessor = "";
+		nodes[i] = newNode;
+		heapArray[i + 1] = i;
+		heapSize++;
 	}
 
 	// I think these are functionally equivalent,
@@ -151,44 +141,43 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 	// heapArray[1].weight = 0;
 	decreaseKey(1, 0);
 
-	double totalWeight = 0;
-
 	while (heapSize != 0)
 	{
-		string uWord = extractMinWord();
+		int uNodeIndex = extractMinNodeIndex();
 
-		unsigned int uRow = 0;
-
-		for (unsigned int i = 0; i < numberOfNodes; i++)
-		{
-			if (nodeVertices[i] == uWord)
-			{
-				uRow = i;
-
-				break;
-			}
-		}
+		node* u = &nodes[uNodeIndex];
 
 		for (unsigned int i = 0; i < numberOfNodes; i++)
 		{
-			if (weights[uRow][i] != 0)
+			if (weights[uNodeIndex][i] != 0)
 			{
 				const string& vWord = nodeVertices[i];
 
-				unsigned int vertexIndex = getVertexIndex(vWord);
+				node* v = &nodes[i];
 
-				node* v = &heapArray[vertexIndex];
+				int positionInQueue = getPositionInQueue(i);
 
-				if (vertexIndex != 0 && weights[uRow][i] < v->weight)
+				if (positionInQueue != -1 && weights[uNodeIndex][i] < v->weight)
 				{
-					double newWeight = weights[uRow][i];
-					v->predecessor = uWord;
-					totalWeight += newWeight;
-					cout << uWord << "-" << v->word << ": " << newWeight << "\n";
-					decreaseKey(vertexIndex, newWeight);
+					double newWeight = weights[uNodeIndex][i];
+					v->predecessor = u->word;
+					//totalWeight += newWeight;
+					//cout << uWord << "-" << v->word << ": " << newWeight << "\n";
+					decreaseKey(positionInQueue, newWeight);
 				}
 			}
 		}
+	}
+
+	double totalWeight = 0;
+
+	for (unsigned int i = 0; i < numberOfNodes; i++)
+	{
+		node& p = nodes[i];
+
+		cout << p.word << "-" << p.predecessor << ": " << p.weight << "\n";
+
+		totalWeight += p.weight;
 	}
 
 	cout << totalWeight << "\n";
