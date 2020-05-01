@@ -100,11 +100,11 @@ void Prim::minHeapify(unsigned int index)
 	}
 }
 
-unsigned int Prim::getPositionInQueue(node* p)
+unsigned int Prim::getPositionInQueue(const node& p)
 {
 	for (unsigned int i = 1; i <= heapSize; i++)
 	{
-		if (heapArray[i] == p)
+		if (heapArray[i] == &p)
 		{
 			return i;
 		}
@@ -148,14 +148,14 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 			{
 				const string& vWord = nodeVertices[i];
 
-				node* v = &nodes[i];
+				node& v = nodes[i];
 
 				unsigned int positionInQueue = getPositionInQueue(v);
 
-				if (positionInQueue != 0 && weights[uNodeIndex][i] < v->weight)
+				if (positionInQueue != 0 && weights[uNodeIndex][i] < v.weight)
 				{
 					double newWeight = weights[uNodeIndex][i];
-					v->predecessor = u->word;
+					v.predecessor = u->word;
 					decreaseKey(positionInQueue, newWeight);
 				}
 			}
@@ -166,7 +166,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		node& p = nodes[i];
+		const node& p = nodes[i];
 
 		if (p.predecessor != "")
 		{
