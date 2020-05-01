@@ -1,7 +1,6 @@
 #include "Kruskal.h"
+#include "ShellSort.h"
 #include <iostream>
-#include <algorithm>
-#include <vector>
 
 Kruskal::Kruskal()
 {
@@ -88,21 +87,6 @@ void Kruskal::mergeSet(node* u, node* v)
 	v->nextVertex = nullptr;
 }
 
-void Kruskal::insertionSort(edge arr[], int size)
-{
-	edge key;
-	int j;
-	for (int i = 1; i < size; i++) {
-		key = arr[i];//take value
-		j = i;
-		while (j > 0 && arr[j - 1].weight > key.weight) {
-			arr[j] = arr[j - 1];
-			j--;
-		}
-		arr[j] = key;   //insert in right place
-	}
-}
-
 void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
 {
 	node* a = nullptr;
@@ -133,8 +117,7 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 		}
 	}
 
-	// Totally legal sorting
-	insertionSort(edges, edgeNumber);
+	ShellSort::sort(edges, edgeNumber, [](edge& edge1, edge& edge2) {return edge1.weight < edge2.weight; });
 
 	for (int i = 0; i < numberOfNodes; i++)
 	{
@@ -143,7 +126,9 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 
 	double totalWeight = 0;
 
-	vector<string> output;
+	edge* mergedEdges = new edge[numberOfNodes - 1];
+
+	unsigned int currentEdgeNumber = 0;
 
 	for (int i = 0; i < edgeNumber; i++)
 	{
@@ -156,19 +141,46 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 		{
 			mergeSet(uSet, vSet);
 
-			output.push_back(nodeVertices[p.u] + "-" + nodeVertices[p.v] + ": " + to_string((int) p.weight));
+			mergedEdges[currentEdgeNumber] = p;
+
+			currentEdgeNumber++;
 
 			totalWeight += p.weight;
 		}
 	}
 
-	sort(output.begin(), output.end());
+	for (unsigned i = 0; i < currentEdgeNumber; i++)
+	{
+		edge& mergedEdge = mergedEdges[i];
+
+		if (nodeVertices[mergedEdge.u] > nodeVertices[mergedEdge.v])
+		{
+			unsigned int temp = mergedEdge.u;
+			mergedEdge.u = mergedEdge.v;
+			mergedEdge.v = temp;
+		}
+	}
+
+	auto alphabeticalComparison = [](edge& edge1, edge& edge2) {
+		if (edge1.u == edge2.u)
+		{
+			return edge1.v < edge2.v;
+		}
+		else
+		{
+			return edge1.u < edge2.u;
+		}
+	};
+
+	ShellSort::sort(mergedEdges, currentEdgeNumber, alphabeticalComparison);
 
 	cout << totalWeight << "\n";
 
-	for (const string& line : output)
+	for (unsigned i = 0; i < currentEdgeNumber; i++)
 	{
-		cout << line << "\n";
+		edge& mergedEdge = mergedEdges[i];
+
+		cout << nodeVertices[mergedEdge.u] << "-" + nodeVertices[mergedEdge.v] << ": " << mergedEdge.weight << "\n";
 	}
 
 	delete[] edges;

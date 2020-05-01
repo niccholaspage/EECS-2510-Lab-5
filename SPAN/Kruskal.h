@@ -18,7 +18,6 @@ private:
 		double weight;
 	};
 	node* head = nullptr;
-	void insertionSort(edge arr[], int n);
 public:
 	Kruskal();
 	~Kruskal();

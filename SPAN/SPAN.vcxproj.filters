@@ -32,5 +32,8 @@
     <ClInclude Include="Prim.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShellSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
