@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "ShellSort.h"
+
 using namespace std;
 
 Prim::Prim()
@@ -14,7 +16,7 @@ Prim::~Prim()
 
 }
 
-Prim::node* Prim::extractMinNode()
+edge* Prim::extractMinNode()
 {
 	if (heapSize < 1)
 	{
@@ -23,7 +25,7 @@ Prim::node* Prim::extractMinNode()
 		return nullptr;
 	}
 
-	node* min = heapArray[1];
+	edge* min = heapArray[1];
 
 	heapArray[1] = heapArray[heapSize];
 
@@ -51,7 +53,7 @@ unsigned int Prim::parent(unsigned int index)
 
 void Prim::decreaseKey(unsigned int index, double key)
 {
-	node* p = heapArray[index];
+	edge* p = heapArray[index];
 
 	if (key > p->weight)
 	{
@@ -64,7 +66,7 @@ void Prim::decreaseKey(unsigned int index, double key)
 
 	while (index > 1 && heapArray[parent(index)]->weight > heapArray[index]->weight)
 	{
-		node* temp = heapArray[index];
+		edge* temp = heapArray[index];
 		heapArray[index] = heapArray[parent(index)];
 		heapArray[parent(index)] = temp;
 		index = parent(index);
@@ -93,14 +95,14 @@ void Prim::minHeapify(unsigned int index)
 
 	if (smallest != index)
 	{
-		node* temp = heapArray[index];
+		edge* temp = heapArray[index];
 		heapArray[index] = heapArray[smallest];
 		heapArray[smallest] = temp;
 		minHeapify(smallest);
 	}
 }
 
-unsigned int Prim::getPositionInQueue(const node& p)
+unsigned int Prim::getPositionInQueue(const edge& p)
 {
 	for (unsigned int i = 1; i <= heapSize; i++)
 	{
@@ -115,20 +117,20 @@ unsigned int Prim::getPositionInQueue(const node& p)
 
 void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
 {
-	nodes = new node[numberOfNodes];
+	nodes = new edge[numberOfNodes];
 
 	heapLength = numberOfNodes + 1;
 
-	heapArray = new node * [heapLength];
+	heapArray = new edge * [heapLength];
 
 	heapSize = 0;
 
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		node newNode;
-		newNode.word = nodeVertices[i];
+		edge newNode;
+		newNode.u = i;
 		newNode.weight = std::numeric_limits<double>::max();
-		newNode.predecessor = "";
+		newNode.v = i;
 		nodes[i] = newNode;
 		heapArray[i + 1] = &nodes[i];
 		heapSize++;
@@ -138,7 +140,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 	while (heapSize != 0)
 	{
-		node* u = extractMinNode();
+		edge* u = extractMinNode();
 
 		unsigned int uNodeIndex = u - &nodes[0];
 
@@ -148,35 +150,47 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 			{
 				const string& vWord = nodeVertices[i];
 
-				node& v = nodes[i];
+				edge& v = nodes[i];
 
 				unsigned int positionInQueue = getPositionInQueue(v);
 
 				if (positionInQueue != 0 && weights[uNodeIndex][i] < v.weight)
 				{
 					double newWeight = weights[uNodeIndex][i];
-					v.predecessor = u->word;
+					v.v = uNodeIndex;
 					decreaseKey(positionInQueue, newWeight);
 				}
 			}
 		}
 	}
 
+	ShellSort::orderEdgeVerticesAlphabetically(nodes, numberOfNodes, nodeVertices);
+
+	ShellSort::sortEdgesAlphabetically(nodes, numberOfNodes);
+
 	double totalWeight = 0;
 
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		const node& p = nodes[i];
+		const edge& p = nodes[i];
 
-		if (p.predecessor != "")
+		if (p.v != p.u)
 		{
-			cout << p.word << "-" << p.predecessor << ": " << p.weight << "\n";
-
 			totalWeight += p.weight;
 		}
 	}
 
 	cout << totalWeight << "\n";
+
+	for (unsigned int i = 0; i < numberOfNodes; i++)
+	{
+		const edge& p = nodes[i];
+
+		if (p.v != p.u)
+		{
+			cout << nodeVertices[p.u] << "-" << nodeVertices[p.v] << ": " << p.weight << "\n";
+		}
+	}
 
 	delete[] nodes;
 
