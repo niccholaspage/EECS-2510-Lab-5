@@ -21,6 +21,11 @@ private:
 	template <typename function>
 	static void sort(edge* edgeArray, unsigned int numberOfEdges, function comparison)
 	{
+		// This method sorts the given edge array, sized numberOfEdges items, using
+		// the comparison function given. The comparison function receives two edge references,
+		// edge1 and edge2, and is expected to return true if edge1 should appear before edge2
+		// in the array.
+		//
 		unsigned int distance = 1;
 
 		while (distance < numberOfEdges) {
