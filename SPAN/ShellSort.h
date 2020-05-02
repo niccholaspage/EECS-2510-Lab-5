@@ -3,7 +3,8 @@
 #include "Edge.h"
 
 class ShellSort {
-public:
+private:
+
 	template <typename function>
 	static void sort(edge* edgeArray, unsigned int numberOfEdges, function comparison)
 	{
@@ -38,6 +39,11 @@ public:
 
 			distance--;
 		} while (distance > 0);
+	}
+public:
+	static void sortEdgesByWeight(edge* edgeArray, unsigned int numberOfEdges)
+	{
+		ShellSort::sort(edgeArray, numberOfEdges, [](edge& edge1, edge& edge2) {return edge1.weight < edge2.weight; });
 	}
 	static void orderEdgeVerticesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
 	{

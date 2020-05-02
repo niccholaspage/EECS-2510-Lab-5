@@ -118,7 +118,7 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 		}
 	}
 
-	ShellSort::sort(edges, edgeNumber, [](edge& edge1, edge& edge2) {return edge1.weight < edge2.weight; });
+	ShellSort::sortEdgesByWeight(edges, edgeNumber);
 
 	for (int i = 0; i < numberOfNodes; i++)
 	{
