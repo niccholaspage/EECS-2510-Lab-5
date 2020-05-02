@@ -4,8 +4,8 @@
 
 class ShellSort {
 public:
-	template <typename elementType, typename function>
-	static void sort(elementType* arr, unsigned int numberOfEdges, function comparison)
+	template <typename function>
+	static void sort(edge* edgeArray, unsigned int numberOfEdges, function comparison)
 	{
 		unsigned int distance = 1;
 
@@ -23,15 +23,15 @@ public:
 			{
 				for (int j = i; j >= 0; j -= distance)
 				{
-					if (comparison(arr[j], arr[j + distance]))
+					if (comparison(edgeArray[j], edgeArray[j + distance]))
 					{
 						break;
 					}
 					else
 					{
-						elementType temp = arr[j];
-						arr[j] = arr[j + distance];
-						arr[j + distance] = temp;
+						edge temp = edgeArray[j];
+						edgeArray[j] = edgeArray[j + distance];
+						edgeArray[j + distance] = temp;
 					}
 				}
 			}
