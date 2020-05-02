@@ -1,3 +1,17 @@
+//==============================================================================================
+// ShellSort.h
+//
+// This header file implements the shell sort algorithm, used to sort edge arrays by their weight,
+// as well as the alphabetical representation of their edge vertices. It also includes a convenience
+// method to flip edge vertices so that the vertex that is earlier in the alphabet will always be
+// the edge's u vertex. The implementation resides in this header instead of a .cpp file due to
+// template functions requiring their implementation to be inside of one file.
+//
+// Author:     Nicholas Nassar, University of Toledo
+// Class:      EECS 2510-001 Non-Linear Data Structures, Spring 2020
+// Instructor: Dr.Thomas
+// Date:       May 4, 2020
+// Copyright:  Copyright 2020 by Nicholas Nassar. All rights reserved.
 #pragma once
 
 #include "Edge.h"
