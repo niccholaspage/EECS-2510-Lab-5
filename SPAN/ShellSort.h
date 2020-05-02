@@ -26,15 +26,24 @@ private:
 		// edge1 and edge2, and is expected to return true if edge1 should appear before edge2
 		// in the array.
 		//
+		// Because shell sort attempts to compare and swap items that are relatively far apart,
+		// we need to calculate our initial distance between items. This distance, as defined
+		// by Hibbard's sequence, is 1 less than the largest power of 2 less than the number of
+		// edges.
+		// We start with a distance of one, as 2^0 is 1.
 		unsigned int distance = 1;
 
-		while (distance < numberOfEdges) {
+		while (distance < numberOfEdges) { // While our distance is less than the number of edges,
+			// we multiply our distance by two, increasing
+			// our distance to the next power of two.
 			distance *= 2;
 		}
 
+		// Since the distance should be the largest power of two LESS than
+		// the number of edges, we divide by two to get back to that power.
 		distance /= 2;
 
-		distance--;
+		distance--; // Finally, we decrement our distance to properly follow Hibbard's sequence.
 
 		do
 		{
