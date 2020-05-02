@@ -4,7 +4,6 @@
 
 class ShellSort {
 private:
-
 	template <typename function>
 	static void sort(edge* edgeArray, unsigned int numberOfEdges, function comparison)
 	{
