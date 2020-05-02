@@ -12,11 +12,6 @@ private:
 		node* nextNeighbor = nullptr;
 		node* nextVertex = nullptr;
 	};
-	struct edge {
-		unsigned int u;
-		unsigned int v;
-		double weight;
-	};
 	node* head = nullptr;
 public:
 	Kruskal();

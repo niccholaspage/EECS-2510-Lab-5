@@ -1,4 +1,5 @@
 #include "Kruskal.h"
+#include "Edge.h"
 #include "ShellSort.h"
 #include <iostream>
 
@@ -149,30 +150,9 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 		}
 	}
 
-	for (unsigned i = 0; i < currentEdgeNumber; i++)
-	{
-		edge& mergedEdge = mergedEdges[i];
+	ShellSort::orderEdgeVerticesAlphabetically(mergedEdges, currentEdgeNumber, nodeVertices);
 
-		if (nodeVertices[mergedEdge.u] > nodeVertices[mergedEdge.v])
-		{
-			unsigned int temp = mergedEdge.u;
-			mergedEdge.u = mergedEdge.v;
-			mergedEdge.v = temp;
-		}
-	}
-
-	auto alphabeticalComparison = [](edge& edge1, edge& edge2) {
-		if (edge1.u == edge2.u)
-		{
-			return edge1.v < edge2.v;
-		}
-		else
-		{
-			return edge1.u < edge2.u;
-		}
-	};
-
-	ShellSort::sort(mergedEdges, currentEdgeNumber, alphabeticalComparison);
+	ShellSort::sortEdgesAlphabetically(mergedEdges, currentEdgeNumber);
 
 	cout << totalWeight << "\n";
 
