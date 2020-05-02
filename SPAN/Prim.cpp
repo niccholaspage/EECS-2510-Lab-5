@@ -6,16 +6,6 @@
 
 using namespace std;
 
-Prim::Prim()
-{
-
-}
-
-Prim::~Prim()
-{
-
-}
-
 edge* Prim::extractMinNode()
 {
 	if (heapSize < 1)

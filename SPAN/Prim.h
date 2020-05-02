@@ -20,7 +20,5 @@ private:
 	edge* nodes;
 	edge** heapArray;
 public:
-	Prim();
-	~Prim();
 	void calculateMst(string* nodeVertices, double** weights, int numberOfNodes);
 };

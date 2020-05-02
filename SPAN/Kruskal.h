@@ -14,9 +14,6 @@ private:
 	};
 	node* head = nullptr;
 public:
-	Kruskal();
-	~Kruskal();
-
 	void makeSet(const string& word);
 	node* findSet(const string& word);
 	void mergeSet(node* u, node* v);

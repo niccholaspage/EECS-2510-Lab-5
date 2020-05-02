@@ -3,16 +3,6 @@
 #include "ShellSort.h"
 #include <iostream>
 
-Kruskal::Kruskal()
-{
-
-}
-
-Kruskal::~Kruskal()
-{
-
-}
-
 void Kruskal::makeSet(const string& word)
 {
 	node* newNode = new node();
