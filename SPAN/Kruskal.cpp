@@ -5,20 +5,29 @@
 
 void Kruskal::makeSet(const string& word)
 {
-	node* newNode = new node();
+	// This method simply creates a set consisting
+	// of a single node containing the given word.
+	// After the set is created, it is placed inside
+	// of the linked list this algorithm mantains.
+	//
+	node* newNode = new node();	// We construct a new node,
 
-	newNode->word = word;
+	newNode->word = word;		// and store our word in it.
 
-	if (head == nullptr)
+	if (head == nullptr)	// If we have no head,
 	{
-		head = newNode;
+		head = newNode;		// we can just make our new node the head of the list.
 
-		return;
+		return;				// We've inserted our node, so we're done!
 	}
 
-	newNode->nextVertex = head;
+	// Since we already have items in the linked list, we need to properly
+	// link our new node to the linked list. We do this by inserting the
+	// new node into the linked list at the beginning, as its simpler than
+	// inserting it into the end.
+	newNode->nextVertex = head; // We first set the next vertex of our new node to the old head,
 
-	head = newNode;
+	head = newNode;				// then we update our head to be the new node.
 }
 
 Kruskal::node* Kruskal::findSet(const string& word)
