@@ -86,16 +86,16 @@ public:
 			}
 		}
 	}
-	static void sortEdgesAlphabetically(edge* edgeArray, unsigned int numberOfEdges)
+	static void sortEdgesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
 	{
-		auto alphabeticalComparison = [](edge& edge1, edge& edge2) {
+		auto alphabeticalComparison = [&nodeVertices](edge& edge1, edge& edge2) {
 			if (edge1.u == edge2.u)
 			{
-				return edge1.v < edge2.v;
+				return nodeVertices[edge1.v] < nodeVertices[edge2.v];
 			}
 			else
 			{
-				return edge1.u < edge2.u;
+				return nodeVertices[edge1.u] < nodeVertices[edge2.u];
 			}
 		};
 

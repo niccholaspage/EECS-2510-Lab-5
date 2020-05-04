@@ -156,7 +156,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 	ShellSort::orderEdgeVerticesAlphabetically(nodes, numberOfNodes, nodeVertices);
 
-	ShellSort::sortEdgesAlphabetically(nodes, numberOfNodes);
+	ShellSort::sortEdgesAlphabetically(nodes, numberOfNodes, nodeVertices);
 
 	double totalWeight = 0;
 
