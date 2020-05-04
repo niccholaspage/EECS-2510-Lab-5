@@ -60,8 +60,13 @@ private:
 					}
 					else
 					{
+						// We perform a swap of edgeArray[j] and edgeArray[j + distance]
+
+						// Assign the edge at position j of the array to a temporary variable,
 						edge temp = edgeArray[j];
+						// set the edge at position j in the array to the edge at j + distance in the array,
 						edgeArray[j] = edgeArray[j + distance];
+						// and finally, set the element at j + distance in the array to our temporary edge.
 						edgeArray[j + distance] = temp;
 					}
 				}
@@ -94,7 +99,8 @@ public:
 			// If the alphabetical representation of u is greater than v,
 			if (nodeVertices[currentEdge.u] > nodeVertices[currentEdge.v])
 			{
-				unsigned int temp = currentEdge.u;	// assign u to a temporary variable,
+				// We perform a swap!
+				unsigned int temp = currentEdge.u;	// Assign u to a temporary variable,
 				currentEdge.u = currentEdge.v;		// set u to v,
 				currentEdge.v = temp;				// and set v to our temporary variable, completing the swap.
 			}
