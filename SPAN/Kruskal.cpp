@@ -60,7 +60,7 @@ Kruskal::node* Kruskal::findSet(const string& word)
 	return nullptr; // We couldn't find any list with the given word, we return a null pointer!
 }
 
-void Kruskal::mergeSet(node* u, node* v)
+void Kruskal::mergeSets(node* u, node* v)
 {
 	node* p = u;
 
@@ -145,7 +145,7 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 
 		if (uSet != vSet)
 		{
-			mergeSet(uSet, vSet);
+			mergeSets(uSet, vSet);
 
 			mergedEdges[currentEdgeNumber] = p;
 

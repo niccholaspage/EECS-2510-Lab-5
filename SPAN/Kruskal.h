@@ -16,6 +16,6 @@ private:
 public:
 	void makeSet(const string& word);
 	node* findSet(const string& word);
-	void mergeSet(node* u, node* v);
+	void mergeSets(node* u, node* v);
 	void calculateMst(string* nodeVertices, double** weights, int numberOfNodes);
 };
