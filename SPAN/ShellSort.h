@@ -88,7 +88,7 @@ public:
 	}
 	static void sortEdgesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
 	{
-		auto alphabeticalComparison = [&nodeVertices](edge& edge1, edge& edge2) {
+		auto alphabeticalComparison = [&](edge& edge1, edge& edge2) {
 			if (edge1.u == edge2.u)
 			{
 				return nodeVertices[edge1.v] < nodeVertices[edge2.v];
