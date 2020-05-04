@@ -62,34 +62,52 @@ Kruskal::node* Kruskal::findSet(const string& word)
 
 void Kruskal::mergeSets(node* u, node* v)
 {
-	node* p = u;
+	// This method merges the two given sets
+	// (first elements being nodes u and v)
+	// into one set.
+	//
+	node* p = u; // We start at our u node.
 
-	while (p->nextNeighbor != nullptr)
+	while (p->nextNeighbor != nullptr) // While p still has a neighbor,
 	{
+		// we set p to its neighbor, as we will eventually
+		// end up with the last item in the u set.
 		p = p->nextNeighbor;
 	}
 
+	// Since we've reached the end of the given u set,
+	// we can set p's next neighbor to v, which will
+	// add on the set of v to the end of the set of u.
 	p->nextNeighbor = v;
 
-	node* q = head;
+	// We now need to fix any sets that
+	// have v as their next vertex.
+	node* q = head; // We start looking at the beginning of our list.
 
-	while (q->nextVertex != nullptr)
+	while (q->nextVertex != nullptr) // While our next vertex isn't null,
 	{
-		if (q->nextVertex == v)
+		if (q->nextVertex == v)	// We check if q's next vertex is v.
 		{
+			// Since it is, we need to fix the next vertex,
+			// so we set q's next vertex to v's next vertex,
+			// and break, as only one list could have had
+			// v as its next vertex.
 			q->nextVertex = v->nextVertex;
 
 			break;
 		}
 
-		q = q->nextVertex;
+		q = q->nextVertex; // We now advance to the next vertex.
 	}
 
-	if (head == v)
+	if (head == v) // In the case of the head being v,
 	{
-		head = v->nextVertex;
+		head = v->nextVertex; // we just set head to the vertex after v.
 	}
 
+	// We set v's next vertex to null, as v
+	// attached to u and can't have a successor
+	// vertex anymore.
 	v->nextVertex = nullptr;
 }
 
