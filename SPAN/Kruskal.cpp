@@ -32,26 +32,32 @@ void Kruskal::makeSet(const string& word)
 
 Kruskal::node* Kruskal::findSet(const string& word)
 {
-	node* p = head;
+	// This method looks through all of the sets that
+	// the algorithm is mantaining, and finds the linked
+	// list that contains a node with the given word
+	// in it.
+	//
+	node* p = head; // Let's start at the head of our list of linked lists.
 
-	while (p != nullptr)
+	while (p != nullptr)	// While we still have an item to look for,
 	{
-		node* q = p;
+		node* q = p;		// we set q to be the first item in our nested list p.
 
-		while (q != nullptr)
+		while (q != nullptr) // While we still have another item left in our list,
 		{
-			if (q->word == word)
+			if (q->word == word) // we check if q's word is the same as the given word.
 			{
-				return p;
+				return p; // If so, we found the linked list, so we just return the head of it!
 			}
 
-			q = q->nextNeighbor;
+			q = q->nextNeighbor; // Since we didn't find the node yet, we check the element right after q.
 		}
 
+		// We weren't able to find the word in this linked list, so we proceed to the next vertex or linked list.
 		p = p->nextVertex;
 	}
 
-	return nullptr;
+	return nullptr; // We couldn't find any list with the given word, we return a null pointer!
 }
 
 void Kruskal::mergeSet(node* u, node* v)
