@@ -144,6 +144,8 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 
 	ShellSort::sortEdgesAlphabetically(mergedEdges, currentEdgeNumber, nodeVertices);
 
+	cout << "Kruskal:\n";
+
 	cout << totalWeight << "\n";
 
 	for (unsigned i = 0; i < currentEdgeNumber; i++)
