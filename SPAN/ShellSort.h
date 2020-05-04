@@ -47,6 +47,9 @@ private:
 
 		do
 		{
+			// In each pass of our do...while loop, we will perform swaps
+			// on elements in our array, that are a certain number of spaces
+			// apart, based on our current distance.
 			for (unsigned int i = 0; i < (numberOfEdges - distance); i++)
 			{
 				for (int j = i; j >= 0; j -= distance)
@@ -70,35 +73,59 @@ private:
 public:
 	static void sortEdgesByWeight(edge* edgeArray, unsigned int numberOfEdges)
 	{
+		// This method sorts the given edges array, with a
+		// size of numberOfEdges, by the weights of the edge.
+		//
+		// We simply call our shell sort, passing in a lambda that returns
+		// true if our first edge's weight is less than our second edge's,
+		// making edge1 appear to the left of edge2 in the array.
 		ShellSort::sort(edgeArray, numberOfEdges, [](edge& edge1, edge& edge2) {return edge1.weight < edge2.weight; });
 	}
 	static void orderEdgeVerticesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
 	{
-		for (unsigned i = 0; i < numberOfEdges; i++)
+		// This method simply orders the two vertices in each
+		// edge of the given edges array, with a size of
+		// numberOfEdges. If an edge's u node is alphabetically
+		// before its v node, the u and v node will be swapped.
+		for (unsigned i = 0; i < numberOfEdges; i++) // Loop through every edge in the array,
 		{
-			edge& currentEdge = edgeArray[i];
+			edge& currentEdge = edgeArray[i]; // Get a reference to the edge.
 
+			// If the alphabetical representation of u is greater than v,
 			if (nodeVertices[currentEdge.u] > nodeVertices[currentEdge.v])
 			{
-				unsigned int temp = currentEdge.u;
-				currentEdge.u = currentEdge.v;
-				currentEdge.v = temp;
+				unsigned int temp = currentEdge.u;	// assign u to a temporary variable,
+				currentEdge.u = currentEdge.v;		// set u to v,
+				currentEdge.v = temp;				// and set v to our temporary variable, completing the swap.
 			}
 		}
 	}
 	static void sortEdgesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
 	{
+		// This method sorts the given edges array, with a
+		// size of numberOfEdges, by using string comparisons
+		// on the name of the node vertices. Since our edge struct
+		// does not contain the string representation of the node,
+		// an array of node vertice strings needs to be passed.
+		//
+		// We define our alphabetical comparison lambda here
+		// just so the code below looks cleaner.
 		auto alphabeticalComparison = [&](edge& edge1, edge& edge2) {
-			if (edge1.u == edge2.u)
+			if (edge1.u == edge2.u) // If edge 1 and 2 have the same u node,
 			{
-				return nodeVertices[edge1.v] < nodeVertices[edge2.v];
+				return nodeVertices[edge1.v] < nodeVertices[edge2.v]; // we check the v nodes.
 			}
-			else
+			else // otherwise,
 			{
-				return nodeVertices[edge1.u] < nodeVertices[edge2.u];
+				return nodeVertices[edge1.u] < nodeVertices[edge2.u]; // we check the u nodes.
 			}
 		};
 
+		// We simply call our shell sort, passing in a lambda that returns
+		// true if our first edge's u node string is less than our second
+		// edge's, making edge1 appear to the left of edge2 in the array.
+		// If our first and second edge both have the same u node,
+		// we simply sort based off of the second vertice, v.
 		sort(edgeArray, numberOfEdges, alphabeticalComparison);
 	}
 };
