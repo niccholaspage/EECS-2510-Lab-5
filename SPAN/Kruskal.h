@@ -3,7 +3,7 @@
 //
 // This header file declares the fields and method needed to perform
 // Kruskal's algorithm to find a minimum spanning tree of a graph.
-// It utilizes a node structure, which holds a node vertice as well
+// It utilizes a node structure, which holds a node name as well
 // as the neighboring node and next vertex node, to create a linked
 // list of linked lists.
 //

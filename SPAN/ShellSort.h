@@ -87,7 +87,7 @@ public:
 		// making edge1 appear to the left of edge2 in the array.
 		ShellSort::sort(edgeArray, numberOfEdges, [](edge& edge1, edge& edge2) {return edge1.weight < edge2.weight; });
 	}
-	static void orderEdgeVerticesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
+	static void orderEdgeVerticesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeNames)
 	{
 		// This method simply orders the two vertices in each
 		// edge of the given edges array, with a size of
@@ -98,7 +98,7 @@ public:
 			edge& currentEdge = edgeArray[i]; // Get a reference to the edge.
 
 			// If the alphabetical representation of u is greater than v,
-			if (nodeVertices[currentEdge.u] > nodeVertices[currentEdge.v])
+			if (nodeNames[currentEdge.u] > nodeNames[currentEdge.v])
 			{
 				// We perform a swap!
 				unsigned int temp = currentEdge.u;	// Assign u to a temporary variable,
@@ -107,24 +107,24 @@ public:
 			}
 		}
 	}
-	static void sortEdgesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeVertices)
+	static void sortEdgesAlphabetically(edge* edgeArray, unsigned int numberOfEdges, string* nodeNames)
 	{
 		// This method sorts the given edges array, with a
 		// size of numberOfEdges, by using string comparisons
-		// on the name of the node vertices. Since our edge struct
+		// on the names of the node vertices. Since our edge struct
 		// does not contain the string representation of the node,
-		// an array of node vertice strings needs to be passed.
+		// the array of node names needs to be passed.
 		//
 		// We define our alphabetical comparison lambda here
 		// just so the code below looks cleaner.
 		auto alphabeticalComparison = [&](edge& edge1, edge& edge2) {
 			if (edge1.u == edge2.u) // If edge 1 and 2 have the same u node,
 			{
-				return nodeVertices[edge1.v] < nodeVertices[edge2.v]; // we check the v nodes.
+				return nodeNames[edge1.v] < nodeNames[edge2.v]; // we check the v nodes.
 			}
 			else // otherwise,
 			{
-				return nodeVertices[edge1.u] < nodeVertices[edge2.u]; // we check the u nodes.
+				return nodeNames[edge1.u] < nodeNames[edge2.u]; // we check the u nodes.
 			}
 		};
 
