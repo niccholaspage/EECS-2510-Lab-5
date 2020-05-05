@@ -58,5 +58,5 @@ public:
 	// Calculates and prints a minimum spanning tree
 	// from an undirected graph with the given node
 	// names and the given weights.
-	void calculateMst(string* nodeNames, int numberOfNodes, double** weights);
+	void calculateMst(string* nodeNames, unsigned int numberOfNodes, double** weights);
 };

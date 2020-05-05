@@ -105,7 +105,7 @@ unsigned int Prim::getPositionInQueue(const edge& p)
 	return 0;
 }
 
-void Prim::calculateMst(string* nodeNames, int numberOfNodes, double** weights)
+void Prim::calculateMst(string* nodeNames, unsigned int numberOfNodes, double** weights)
 {
 	nodes = new edge[numberOfNodes];
 

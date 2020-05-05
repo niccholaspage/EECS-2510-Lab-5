@@ -111,7 +111,7 @@ void Kruskal::mergeSets(node* u, node* v)
 	v->nextVertex = nullptr;
 }
 
-void Kruskal::calculateMst(string* nodeNames, int numberOfNodes, double** weights)
+void Kruskal::calculateMst(string* nodeNames, unsigned int numberOfNodes, double** weights)
 {
 	node* a = nullptr;
 
