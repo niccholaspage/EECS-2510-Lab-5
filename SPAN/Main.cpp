@@ -26,16 +26,16 @@ void parseGraphFile(const string& file_path)
 	inputStream >> numberOfNodes;
 
 	// We dynamically allocate a string array of size numberOfNodes,
-	// which will store all of our node vertice names.
+	// which will store all of our node names.
 	string* nodeNames = new string[numberOfNodes];
 
 	// We loop numberOfNodes times, as that is how many
-	// node vertices we will have.
+	// nodes we will have.
 	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
 		// We now simply pipe our input stream into
-		// our nodeVerticies array at position i,
-		// which will put the node vertice name
+		// our nodeNames array at position i,
+		// which will put the node name
 		// into our array at the right position.
 		inputStream >> nodeNames[i];
 	}
@@ -88,7 +88,7 @@ void parseGraphFile(const string& file_path)
 
 	delete prim;
 
-	// Deletion of node vertices array
+	// Deletion of node names array
 	delete[] nodeNames;
 
 	// Deletion of weights matrix
