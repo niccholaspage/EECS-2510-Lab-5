@@ -105,7 +105,7 @@ unsigned int Prim::getPositionInQueue(const edge& p)
 	return 0;
 }
 
-void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
+void Prim::calculateMst(string* nodeNames, int numberOfNodes, double** weights)
 {
 	nodes = new edge[numberOfNodes];
 
@@ -138,7 +138,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 		{
 			if (weights[uNodeIndex][i] != 0)
 			{
-				const string& vWord = nodeVertices[i];
+				const string& vWord = nodeNames[i];
 
 				edge& v = nodes[i];
 
@@ -154,9 +154,9 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 		}
 	}
 
-	ShellSort::orderEdgeVerticesAlphabetically(nodes, numberOfNodes, nodeVertices);
+	ShellSort::orderEdgeVerticesAlphabetically(nodes, numberOfNodes, nodeNames);
 
-	ShellSort::sortEdgesAlphabetically(nodes, numberOfNodes, nodeVertices);
+	ShellSort::sortEdgesAlphabetically(nodes, numberOfNodes, nodeNames);
 
 	double totalWeight = 0;
 
@@ -180,7 +180,7 @@ void Prim::calculateMst(string* nodeVertices, double** weights, int numberOfNode
 
 		if (p.v != p.u)
 		{
-			cout << nodeVertices[p.u] << "-" << nodeVertices[p.v] << ": " << p.weight << "\n";
+			cout << nodeNames[p.u] << "-" << nodeNames[p.v] << ": " << p.weight << "\n";
 		}
 	}
 

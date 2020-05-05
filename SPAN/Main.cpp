@@ -84,7 +84,7 @@ void parseGraphFile(const string& file_path)
 
 	Prim* prim = new Prim();
 
-	prim->calculateMst(nodeNames, weights, numberOfNodes);
+	prim->calculateMst(nodeNames, numberOfNodes, weights);
 
 	delete prim;
 

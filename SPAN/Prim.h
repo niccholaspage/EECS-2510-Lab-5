@@ -20,5 +20,5 @@ private:
 	edge* nodes;
 	edge** heapArray;
 public:
-	void calculateMst(string* nodeVertices, double** weights, int numberOfNodes);
+	void calculateMst(string* nodeVertices, int numberOfNodes, double** weights);
 };

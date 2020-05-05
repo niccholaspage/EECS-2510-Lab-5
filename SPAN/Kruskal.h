@@ -56,7 +56,7 @@ public:
 	void mergeSets(node* u, node* v);
 
 	// Calculates and prints a minimum spanning tree
-	// from an undirected graph with the given vertice
+	// from an undirected graph with the given node
 	// names and the given weights.
 	void calculateMst(string* nodeNames, int numberOfNodes, double** weights);
 };
