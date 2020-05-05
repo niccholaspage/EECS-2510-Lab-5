@@ -111,7 +111,7 @@ void Kruskal::mergeSets(node* u, node* v)
 	v->nextVertex = nullptr;
 }
 
-void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfNodes)
+void Kruskal::calculateMst(string* nodeNames, int numberOfNodes, double** weights)
 {
 	node* a = nullptr;
 
@@ -145,7 +145,7 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 
 	for (int i = 0; i < numberOfNodes; i++)
 	{
-		makeSet(nodeVertices[i]);
+		makeSet(nodeNames[i]);
 	}
 
 	double totalWeight = 0;
@@ -158,8 +158,8 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 	{
 		edge& p = edges[i];
 
-		node* uSet = findSet(nodeVertices[p.u]);
-		node* vSet = findSet(nodeVertices[p.v]);
+		node* uSet = findSet(nodeNames[p.u]);
+		node* vSet = findSet(nodeNames[p.v]);
 
 		if (uSet != vSet)
 		{
@@ -173,9 +173,9 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 		}
 	}
 
-	ShellSort::orderEdgeVerticesAlphabetically(mergedEdges, currentEdgeNumber, nodeVertices);
+	ShellSort::orderEdgeVerticesAlphabetically(mergedEdges, currentEdgeNumber, nodeNames);
 
-	ShellSort::sortEdgesAlphabetically(mergedEdges, currentEdgeNumber, nodeVertices);
+	ShellSort::sortEdgesAlphabetically(mergedEdges, currentEdgeNumber, nodeNames);
 
 	cout << "Kruskal:\n";
 
@@ -185,7 +185,7 @@ void Kruskal::calculateMst(string* nodeVertices, double** weights, int numberOfN
 	{
 		edge& mergedEdge = mergedEdges[i];
 
-		cout << nodeVertices[mergedEdge.u] << "-" + nodeVertices[mergedEdge.v] << ": " << mergedEdge.weight << "\n";
+		cout << nodeNames[mergedEdge.u] << "-" + nodeNames[mergedEdge.v] << ": " << mergedEdge.weight << "\n";
 	}
 
 	delete[] edges;

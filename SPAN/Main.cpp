@@ -27,7 +27,7 @@ void parseGraphFile(const string& file_path)
 
 	// We dynamically allocate a string array of size numberOfNodes,
 	// which will store all of our node vertice names.
-	string* nodeVertices = new string[numberOfNodes];
+	string* nodeNames = new string[numberOfNodes];
 
 	// We loop numberOfNodes times, as that is how many
 	// node vertices we will have.
@@ -37,7 +37,7 @@ void parseGraphFile(const string& file_path)
 		// our nodeVerticies array at position i,
 		// which will put the node vertice name
 		// into our array at the right position.
-		inputStream >> nodeVertices[i];
+		inputStream >> nodeNames[i];
 	}
 
 	// We need a 2D array containing our weights / adjacency
@@ -76,7 +76,7 @@ void parseGraphFile(const string& file_path)
 
 	Kruskal* kruskal = new Kruskal();
 
-	kruskal->calculateMst(nodeVertices, weights, numberOfNodes);
+	kruskal->calculateMst(nodeNames, numberOfNodes, weights);
 
 	delete kruskal;
 
@@ -84,12 +84,12 @@ void parseGraphFile(const string& file_path)
 
 	Prim* prim = new Prim();
 
-	prim->calculateMst(nodeVertices, weights, numberOfNodes);
+	prim->calculateMst(nodeNames, weights, numberOfNodes);
 
 	delete prim;
 
 	// Deletion of node vertices array
-	delete[] nodeVertices;
+	delete[] nodeNames;
 
 	// Deletion of weights matrix
 	for (unsigned int i = 0; i < numberOfNodes; i++)
