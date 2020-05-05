@@ -119,9 +119,9 @@ void Kruskal::calculateMst(string* nodeNames, unsigned int numberOfNodes, double
 
 	int edgeNumber = 0;
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
-		for (int j = 0; j < numberOfNodes; j++)
+		for (unsigned int j = 0; j < numberOfNodes; j++)
 		{
 			double weight = weights[i][j];
 
@@ -143,7 +143,7 @@ void Kruskal::calculateMst(string* nodeNames, unsigned int numberOfNodes, double
 
 	ShellSort::sortEdgesByWeight(edges, edgeNumber);
 
-	for (int i = 0; i < numberOfNodes; i++)
+	for (unsigned int i = 0; i < numberOfNodes; i++)
 	{
 		makeSet(nodeNames[i]);
 	}
